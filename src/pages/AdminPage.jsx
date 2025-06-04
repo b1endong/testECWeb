@@ -1,4 +1,3 @@
-import {User} from "lucide-react";
 import React, {useState} from "react";
 import ProductQuery from "../Components/ProductQuery";
 import CategoryQuery from "../Components/CategoryQuery";
@@ -7,7 +6,6 @@ import UserQuery from "../Components/UserQuery";
 import OrderQuery from "../Components/OrderQuery";
 
 import CouponQuery from "../Components/CouponQuery";
-4;
 
 import SaleQuery from "../Components/SaleQuery";
 
