@@ -1,10 +1,9 @@
 import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 import {resetUser} from "../redux/UserSliceRedux";
-import {useDispatch} from "react-redux";
+import {store} from "../redux/store";
 
 const axiosJWT = axios.create();
-const dispatch = useDispatch();
 
 const handleDecode = () => {
     const storageData = localStorage.getItem("access_token");
@@ -53,11 +52,15 @@ axiosJWT.interceptors.request.use(
                     console.error("Refresh token failed:", error);
                     // Nếu refresh token thất bại, xóa token cũ và chuyển hướng đến login
                     localStorage.removeItem("access_token");
+                    localStorage.removeItem("refresh_token");
+                    store.dispatch(resetUser());
                     window.location.href = "/login";
                     return Promise.reject(error);
                 }
             } else {
-                dispatch(resetUser());
+                store.dispatch(resetUser());
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("refresh_token");
             }
         } else if (storageData) {
             config.headers["Authorization"] = `Bearer ${storageData}`;
