@@ -5,13 +5,5 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [react(), tailwindcss()],
-    server: {
-        proxy: {
-            "/api/v1": {
-                target: "https://ecweb.me", // địa chỉ backend
-                changeOrigin: true,
-                secure: false,
-            },
-        },
-    },
+    // No proxy needed since we're using external API directly
 });

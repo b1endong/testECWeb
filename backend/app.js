@@ -28,7 +28,12 @@ app.use(morgan("dev"));
 app.use(helmet());
 // // Enable CORS with custom options
 const corsOptions = {
-    origin: ["https://test-ec-web.vercel.app", "https://ecweb.me"],
+    origin: [
+        "https://test-ec-web.vercel.app",
+        "https://ecweb.me",
+        "http://localhost:5173", // Vite dev server
+        "http://localhost:3000", // Local development
+    ],
     credentials: true,
 };
 
