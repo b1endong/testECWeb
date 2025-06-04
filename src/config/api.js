@@ -2,7 +2,7 @@
 const getBaseURL = () => {
     // In production, use the backend domain directly
     if (import.meta.env.PROD) {
-        return "https://ecweb.me/api/v1";
+        return "https://ecweb.me";
     }
     // In development, use proxy
     return "/api/v1";
