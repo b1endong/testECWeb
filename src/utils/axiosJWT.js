@@ -1,7 +1,10 @@
 import {jwtDecode} from "jwt-decode";
 import axios from "axios";
+import {API_BASE_URL} from "../config/api.js";
 
-const axiosJWT = axios.create();
+const axiosJWT = axios.create({
+    baseURL: API_BASE_URL,
+});
 
 const handleDecode = () => {
     const storageData = localStorage.getItem("access_token");
