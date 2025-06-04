@@ -40,11 +40,16 @@ const logInUser = async (req, res) => {
         const {email, password} = req.body;
         const respone = await userService.logInUser(req.body);
         const {refreshToken, ...newRespone} = respone;
-        res.cookie("refresh_token", refreshToken, {
+
+        // Cookie configuration for cross-origin
+        const cookieOptions = {
             httpOnly: true,
-            secure: true,
-            samesite: "none",
-        });
+            secure: process.env.NODE_ENV === "production", // Only secure in production
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        };
+
+        res.cookie("refresh_token", refreshToken, cookieOptions);
         return res.status(200).json(newRespone);
     } catch (err) {
         if (err.name === "ValidationError") {
@@ -148,17 +153,39 @@ const getUserById = async (req, res) => {
 const refreshToken = async (req, res) => {
     try {
         const token = req.cookies.refresh_token;
+        console.log(
+            "Refresh token from cookies:",
+            token ? "Present" : "Missing"
+        );
+
         if (!token) {
-            return res.status(404).json({
+            return res.status(401).json({
                 success: false,
-                error: "Token is invalid",
+                message: "Refresh token not found",
             });
         }
-        const respone = await jwtService.refreshToken(token);
-        return res.status(200).json(respone);
+
+        const response = await jwtService.refreshToken(token);
+        console.log("Refresh token response:", response);
+
+        if (response.success) {
+            return res.status(200).json({
+                status: "OK",
+                accessToken: response.accessToken,
+                message: response.message,
+            });
+        } else {
+            return res.status(401).json({
+                success: false,
+                message: response.message || "Invalid refresh token",
+            });
+        }
     } catch (err) {
-        console.log(err);
-        res.status(500).json({success: false, error: "SERVER ERROR"});
+        console.error("Refresh token error:", err);
+        res.status(500).json({
+            success: false,
+            message: "SERVER ERROR",
+        });
     }
 };
 

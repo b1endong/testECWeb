@@ -1,7 +1,9 @@
 import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 
-const axiosJWT = axios.create();
+const axiosJWT = axios.create({
+    withCredentials: true, // Ensure cookies are sent with all requests
+});
 
 const handleDecode = () => {
     const storageData = localStorage.getItem("access_token");
@@ -16,14 +18,14 @@ axiosJWT.interceptors.request.use(
     async (config) => {
         const currentTime = new Date();
         const {decode, storageData} = handleDecode();
-
         if (decode.exp && decode.exp < currentTime.getTime() / 1000) {
             try {
                 console.log("Token expired, refreshing...");
                 const newData = await axios.post(
                     "https://ecweb.me/api/v1/users/refresh-token",
+                    {}, // Empty body
                     {
-                        withCredentials: true,
+                        withCredentials: true, // This should be in config, not body
                     }
                 );
 

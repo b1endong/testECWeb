@@ -9,6 +9,7 @@ import {API_BASE_URL} from "./config/api.js";
 
 // Set up global axios defaults
 axios.defaults.baseURL = API_BASE_URL;
+axios.defaults.withCredentials = true; // This ensures cookies are sent with all requests
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
