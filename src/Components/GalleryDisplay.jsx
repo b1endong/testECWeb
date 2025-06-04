@@ -1,7 +1,3 @@
-import React from "react";
-import {Link} from "react-router-dom";
-
-// Trong Vite, assets trong public/ phải tham chiếu bằng đường dẫn tuyệt đối
 const hoodie = "/Assets/Hoodies.jpeg";
 const tshirt = "/Assets/T-Shirt.jpeg";
 const pants = "/Assets/Pants.jpeg";
