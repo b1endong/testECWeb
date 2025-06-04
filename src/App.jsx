@@ -29,20 +29,27 @@ const AppContent = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const storageData = localStorage.getItem("access_token");
+        const refreshToken = localStorage.getItem("refresh_token");
         const decode = storageData ? jwtDecode(storageData) : null;
 
         if (decode && decode.id) {
-            handleGetDetailUser(decode.id, storageData);
+            handleGetDetailUser(decode.id, storageData, refreshToken);
         }
     }, []);
 
-    const handleGetDetailUser = async (id, token) => {
+    const handleGetDetailUser = async (id, token, refreshToken) => {
         const res = await axiosJWT.get(`/api/v1/users/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-        dispatch(updateUser({...res.data.data, access_token: token}));
+        dispatch(
+            updateUser({
+                ...res.data.data,
+                access_token: token,
+                refresh_token: refreshToken,
+            })
+        );
     };
 
     return (

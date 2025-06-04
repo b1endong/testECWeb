@@ -7,6 +7,7 @@ const initialState = {
     address: "",
     role: "",
     access_token: "",
+    refresh_token: "",
     isSubscribe: false,
 };
 
@@ -23,6 +24,7 @@ export const userSlice = createSlice({
                 role,
                 access_token,
                 isSubscribe,
+                refresh_token,
             } = actions.payload;
             state.name = name;
             state.email = email;
@@ -30,6 +32,7 @@ export const userSlice = createSlice({
             state.address = address;
             state.role = role;
             state.access_token = access_token;
+            state.refresh_token = refresh_token;
             state.isSubscribe = isSubscribe || false;
         },
         resetUser: (state, actions) => {
@@ -39,6 +42,7 @@ export const userSlice = createSlice({
             state.address = "";
             state.role = "";
             state.access_token = "";
+            state.refresh_token = "";
             state.isSubscribe = false;
         },
     },

@@ -44,7 +44,9 @@ const LoginPage = () => {
                         navigate("/");
                     }
                     const token = res.data.accessToken;
+                    const refreshToken = res.data.refreshToken;
                     localStorage.setItem("access_token", token);
+                    localStorage.setItem("refresh_token", refreshToken);
                     if (token) {
                         const decode = jwtDecode(token);
                         if (decode.id) {
@@ -60,6 +62,7 @@ const LoginPage = () => {
                                         updateUser({
                                             ...user,
                                             access_token: token,
+                                            refresh_token: refreshToken,
                                         })
                                     );
                                 });
