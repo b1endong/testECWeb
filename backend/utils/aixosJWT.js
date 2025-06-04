@@ -1,6 +1,6 @@
 import {jwtDecode} from "jwt-decode";
 import axios from "axios";
-import {resetUser} from "../redux/UserSliceRedux";
+import {resetUser} from "../../src/redux/UserSliceRedux";
 import {useDispatch} from "react-redux";
 
 const axiosJWT = axios.create();
