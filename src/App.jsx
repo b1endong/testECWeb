@@ -20,7 +20,7 @@ import AdminPage from "./pages/AdminPage";
 import {useDispatch} from "react-redux";
 import {jwtDecode} from "jwt-decode";
 import {updateUser} from "./redux/UserSliceRedux.js";
-import axiosJWT from "../backend/utils/aixosJWT.js";
+import axiosJWT from "./utils/axiosJWT.js";
 
 const AppContent = () => {
     const location = useLocation();
