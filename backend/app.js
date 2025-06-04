@@ -28,7 +28,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 // // Enable CORS with custom options
 const corsOptions = {
-    origin: ["https://test-ec-web.vercel.app", "http://localhost:5173"],
+    origin: ["https://test-ec-web.vercel.app", "https://ecweb.me"],
     credentials: true,
 };
 
