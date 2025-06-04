@@ -19,7 +19,7 @@ const ProductCard = ({product}) => {
     const getImageUrl = (url) => {
         if (!url) return "/placeholder-image.jpg";
         if (url.startsWith("http")) return url;
-        return `http://localhost:3000${url}`;
+        return `https://ecweb.me${url}`;
     };
 
     return (

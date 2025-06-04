@@ -85,7 +85,7 @@ const ProductDelete = () => {
                         >
                             <div className="mb-3">
                                 <img
-                                    src={`http://localhost:3000${product.image_url}`}
+                                    src={`https://ecweb.me${product.image_url}`}
                                     alt={product.name}
                                     className="w-full max-h-64 object-contain rounded-md mb-2"
                                 />

@@ -432,7 +432,7 @@ const ProductUpdate = () => {
                                         Current Image:
                                     </p>
                                     <img
-                                        src={`http://localhost:3000${
+                                        src={`https://ecweb.me${
                                             products.find(
                                                 (p) => p._id === selectedProduct
                                             ).image_url
