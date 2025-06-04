@@ -1,9 +1,7 @@
 import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 
-const axiosJWT = axios.create({
-    withCredentials: true, // Ensure cookies are sent with all requests
-});
+const axiosJWT = axios.create();
 
 const handleDecode = () => {
     const storageData = localStorage.getItem("access_token");
